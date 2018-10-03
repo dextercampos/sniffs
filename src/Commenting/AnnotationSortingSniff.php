@@ -18,11 +18,11 @@ class AnnotationSortingSniff implements Sniff
     /**
      * @var string
      */
-    public const CODE_ANNOTATION_SORT_ALPHABETICALLY = 'AnnotationSortAlphabetically';
+    public const CODE_ANNOTATION_ALWAYS_TOP = 'AlwaysTopAnnotation';
     /**
      * @var string
      */
-    public const CODE_SHOULD_BE_START_OF_DOC = 'AnnotationStartOfDoc';
+    public const CODE_ANNOTATION_SORT_ALPHABETICALLY = 'AnnotationSortAlphabetically';
     /**
      * @var string[]
      */
@@ -139,7 +139,7 @@ class AnnotationSortingSniff implements Sniff
                     $currentAnnotation
                 ),
                 $currentPointer,
-                self::CODE_SHOULD_BE_START_OF_DOC
+                self::CODE_ANNOTATION_ALWAYS_TOP
             );
 
             return true;

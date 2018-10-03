@@ -50,6 +50,14 @@ class AnnotationSortingSniffTest extends TestCase
     {
         $report = self::checkFile($this->stubsPath . 'FooFailed.php.inc');
 
+        self::assertSniffError(
+            $report,
+            19,
+            AnnotationSortingSniff::CODE_ANNOTATION_SORT_ALPHABETICALLY,
+            'Expected annotations should be alphabetically sorted, '
+            . 'found "@zTestAnnotation" is before "@yTestAnnotation".'
+        );
+
         self::assertSame(1, $report->getErrorCount());
     }
 
@@ -70,6 +78,15 @@ class AnnotationSortingSniffTest extends TestCase
                 '@throws'
             ]
         ]);
+
+        self::assertSniffError(
+            $report,
+            13,
+            AnnotationSortingSniff::CODE_ANNOTATION_ALWAYS_TOP,
+            'Always on top annotations (@covers, @param, @return, @throws) '
+            . 'should be placed above other annotations, '
+            . 'found "@annotation" is before "@param".'
+        );
 
         self::assertSame(2, $report->getErrorCount());
     }
