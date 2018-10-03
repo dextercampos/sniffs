@@ -134,9 +134,9 @@ class AnnotationSortingSniff implements Sniff
             $this->phpcsFile->addError(
                 \sprintf(
                     'Always on top annotations (%s) should be placed above other annotations, found "%s" is before "%s".',
+                    implode(', ', $this->alwaysTopAnnotations),
                     $previousAnnotation,
-                    $currentAnnotation,
-                    implode(', ', $this->alwaysTopAnnotations)
+                    $currentAnnotation
                 ),
                 $currentPointer,
                 self::CODE_SHOULD_BE_START_OF_DOC

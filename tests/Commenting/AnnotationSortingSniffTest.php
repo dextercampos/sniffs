@@ -10,6 +10,8 @@ use SlevomatCodingStandard\Helpers\DocCommentHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 
 /**
+ * @covers \NatePage\Sniffs\Commenting\AnnotationSortingSniff
+ *
  * @runTestsInSeparateProcesses
  */
 class AnnotationSortingSniffTest extends TestCase
