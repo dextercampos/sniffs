@@ -78,9 +78,9 @@ class PSR4Sniff implements Sniff
     public function register(): array
     {
         return [
-            T_CLASS,
-            T_INTERFACE,
-            T_TRAIT
+            \T_CLASS,
+            \T_INTERFACE,
+            \T_TRAIT
         ];
     }
 
@@ -147,24 +147,30 @@ class PSR4Sniff implements Sniff
         $classFilename = $this->phpcsFile->getFilename();
 
         foreach ($psr4s as $baseNamespace => $basePath) {
-            $testPath = \ltrim(\str_replace([$baseNamespace, '\\'], [$basePath, '/'], $classFqn), '/');
+            $basePathPosition = \strpos($classFilename, $basePath);
+
+            if ($basePathPosition === false) {
+                continue;
+            }
+
+            // Convert $classFqn to be similar to $classFilename. \Base\Namespace\To\Class to base/path/src/to/Class
+            $testPath = \str_replace(
+                [\trim($baseNamespace, '\\') . '\\', '\\'],
+                [\trim($basePath, '/') . '/', '/'],
+                \trim($classFqn, '\\')
+            );
 
             if (\strpos($classFilename, $testPath) !== false) {
                 return true;
             }
 
-            $basePathPosition = \strpos($classFilename, $basePath);
+            $relativePath = \substr(\dirname($classFilename), $basePathPosition, \strlen($classFilename));
 
-            if ($basePathPosition !== false) {
-
-                $relativePath = \substr(\dirname($classFilename), $basePathPosition, \strlen($classFilename));
-
-                $this->expectedNamespace = \str_replace(
-                    [$basePath, '/'],
-                    [$baseNamespace, '\\'],
-                    $relativePath
-                );
-            }
+            $this->expectedNamespace = \str_replace(
+                [$basePath, '/'],
+                [$baseNamespace, '\\'],
+                $relativePath
+            );
         }
 
         $this->code = self::CODE_NAMESPACE_VIOLATION;
