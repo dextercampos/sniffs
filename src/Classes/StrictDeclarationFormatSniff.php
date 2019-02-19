@@ -6,7 +6,9 @@ declare(strict_types=1);
  * are no spaces within the declaration
  *
  * @author Scott Dawson <scott@loyaltycorp.com.au>
+ *
  * @copyright 2018 Loyalty Corp Pty Ltd (ABN 39 615 958 873)
+ *
  * @license https://github.com/loyaltycorp/standards/blob/master/licence BSD Licence
  */
 
@@ -24,6 +26,8 @@ class StrictDeclarationFormatSniff implements Sniff
      * @param int $stackPtr The position of the current token in the stack passed in $tokens
      *
      * @return void
+     *
+     * @phpcsSuppress NatePage.Commenting.FunctionComment.ScalarTypeHintMissing
      */
     public function process(File $phpcsFile, $stackPtr): void
     {
@@ -31,8 +35,8 @@ class StrictDeclarationFormatSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         // If declaration doesn't exist, skip
-        $declarationPtr = $phpcsFile->findNext(T_DECLARE, $stackPtr);
-        if (!\is_int($declarationPtr)) {
+        $declarationPtr = $phpcsFile->findNext(\T_DECLARE, $stackPtr);
+        if (\is_int($declarationPtr) === false) {
             return;
         }
 
@@ -41,7 +45,7 @@ class StrictDeclarationFormatSniff implements Sniff
         $declaration = $tokens[$declarationPtr];
 
         // If not a strict type declaration, skip
-        $declarationType = $tokens[(int)$phpcsFile->findNext(T_STRING, $declarationPtr)]['content'] ?? '';
+        $declarationType = $tokens[(int)$phpcsFile->findNext(\T_STRING, $declarationPtr)]['content'] ?? '';
         if (\mb_strtolower($declarationType) !== 'strict_types') {
             return;
         }
@@ -65,12 +69,12 @@ class StrictDeclarationFormatSniff implements Sniff
         }
 
         // Get pointers
-        $openParenthesisPtr = $phpcsFile->findNext(T_OPEN_PARENTHESIS, $declarationPtr);
-        $stringPtr = $phpcsFile->findNext(T_STRING, (int)$openParenthesisPtr);
-        $equalsPtr = $phpcsFile->findNext(T_EQUAL, (int)$stringPtr);
-        $valuePtr = $phpcsFile->findNext(T_LNUMBER, (int)$equalsPtr);
-        $closeParenthesisPtr = $phpcsFile->findNext(T_CLOSE_PARENTHESIS, (int)$valuePtr);
-        $semicolonPtr = $phpcsFile->findNext(T_SEMICOLON, (int)$closeParenthesisPtr);
+        $openParenthesisPtr = $phpcsFile->findNext(\T_OPEN_PARENTHESIS, $declarationPtr);
+        $stringPtr = $phpcsFile->findNext(\T_STRING, (int)$openParenthesisPtr);
+        $equalsPtr = $phpcsFile->findNext(\T_EQUAL, (int)$stringPtr);
+        $valuePtr = $phpcsFile->findNext(\T_LNUMBER, (int)$equalsPtr);
+        $closeParenthesisPtr = $phpcsFile->findNext(\T_CLOSE_PARENTHESIS, (int)$valuePtr);
+        $semicolonPtr = $phpcsFile->findNext(\T_SEMICOLON, (int)$closeParenthesisPtr);
 
         // Get data
         $openParenthesis = $tokens[(int)$openParenthesisPtr];
@@ -81,12 +85,12 @@ class StrictDeclarationFormatSniff implements Sniff
         $semicolon = $tokens[(int)$semicolonPtr];
 
         // Ensure declaration is exactly as expected
-        if (!\is_int($openParenthesisPtr) ||
-            !\is_int($stringPtr) ||
-            !\is_int($equalsPtr) ||
-            !\is_int($valuePtr) ||
-            !\is_int($closeParenthesisPtr) ||
-            !\is_int($semicolonPtr) ||
+        if (\is_int($openParenthesisPtr) === false ||
+            \is_int($stringPtr) === false ||
+            \is_int($equalsPtr) === false ||
+            \is_int($valuePtr) === false ||
+            \is_int($closeParenthesisPtr) === false ||
+            \is_int($semicolonPtr) === false ||
             $string['content'] !== 'strict_types' ||
             $value['content'] !== '1' ||
             $declaration['line'] !== $openParenthesis['line'] ||
@@ -115,12 +119,12 @@ class StrictDeclarationFormatSniff implements Sniff
     /**
      * Returns the token types that this sniff is interested in
      *
-     * @return array
+     * @return mixed[]
      */
     public function register(): array
     {
         return [
-            T_OPEN_TAG
+            \T_OPEN_TAG
         ];
     }
 }

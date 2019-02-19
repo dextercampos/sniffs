@@ -19,14 +19,17 @@ class AnnotationSortingSniff implements Sniff
      * @var string
      */
     public const CODE_ANNOTATION_ALWAYS_TOP = 'AlwaysTopAnnotation';
+
     /**
      * @var string
      */
     public const CODE_ANNOTATION_SORT_ALPHABETICALLY = 'AnnotationSortAlphabetically';
+
     /**
      * @var string[]
      */
     public $alwaysTopAnnotations = [];
+
     /**
      * @var \PHP_CodeSniffer\Files\File
      */
@@ -40,8 +43,7 @@ class AnnotationSortingSniff implements Sniff
      *
      * @return void
      *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-     * @phpcsSuppress EoneoPay.Commenting.FunctionComment.ScalarTypeHintMissing
+     * @phpcsSuppress NatePage.Commenting.FunctionComment.ScalarTypeHintMissing
      */
     public function process(File $phpcsFile, $openPointer): void
     {
@@ -133,8 +135,9 @@ class AnnotationSortingSniff implements Sniff
             \in_array($currentAnnotation, $this->alwaysTopAnnotations, true) === true) {
             $this->phpcsFile->addError(
                 \sprintf(
-                    'Always on top annotations (%s) should be placed above other annotations, found "%s" is before "%s".',
-                    implode(', ', $this->alwaysTopAnnotations),
+                    'Always on top annotations (%s) should be placed above other annotations, '
+                    . 'found "%s" is before "%s".',
+                    \implode(', ', $this->alwaysTopAnnotations),
                     $previousAnnotation,
                     $currentAnnotation
                 ),

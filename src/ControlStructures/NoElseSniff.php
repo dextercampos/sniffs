@@ -22,7 +22,7 @@ class NoElseSniff implements Sniff
     public function register(): array
     {
         return [
-            T_ELSE
+            \T_ELSE
         ];
     }
 }

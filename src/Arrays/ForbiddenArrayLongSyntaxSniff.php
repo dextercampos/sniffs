@@ -5,7 +5,9 @@ declare(strict_types=1);
  * Checks only short syntax is used to define arrays.
  *
  * @author Nathan Page <nathan.page@loyaltycorp.com.au>
+ *
  * @copyright 2018 Loyalty Corp Pty Ltd (ABN 39 615 958 873)
+ *
  * @license https://github.com/loyaltycorp/standards/blob/master/licence BSD Licence
  */
 
@@ -24,6 +26,8 @@ class ForbiddenArrayLongSyntaxSniff implements Sniff
      *                                        in the stack passed in $tokens.
      *
      * @return void
+     *
+     * @phpcsSuppress NatePage.Commenting.FunctionComment.ScalarTypeHintMissing
      */
     public function process(File $phpcsFile, $stackPtr): void
     {
@@ -58,7 +62,7 @@ class ForbiddenArrayLongSyntaxSniff implements Sniff
     public function register(): array
     {
         return [
-            T_ARRAY
+            \T_ARRAY
         ];
     }
 }

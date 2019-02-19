@@ -5,7 +5,9 @@ declare(strict_types=1);
  * Checks doc comment blocks follow our standards.
  *
  * @author Nathan Page <nathan.page@loyaltycorp.com.au>
+ *
  * @copyright 2018 Loyalty Corp Pty Ltd (ABN 39 615 958 873)
+ *
  * @license https://github.com/loyaltycorp/standards/blob/master/licence BSD Licence
  */
 
@@ -39,6 +41,8 @@ class DocCommentSpacingSniff implements Sniff
      * @return void
      *
      * @throws \SlevomatCodingStandard\Helpers\EmptyFileException
+     *
+     * @phpcsSuppress NatePage.Commenting.FunctionComment.ScalarTypeHintMissing
      */
     public function process(File $phpcsFile, $openPointer): void
     {
@@ -53,7 +57,7 @@ class DocCommentSpacingSniff implements Sniff
 
         $fcStartPointer = TokenHelper::findNextExcluding(
             $phpcsFile,
-            [T_DOC_COMMENT_WHITESPACE, T_DOC_COMMENT_STAR],
+            [\T_DOC_COMMENT_WHITESPACE, \T_DOC_COMMENT_STAR],
             $openPointer + 1,
             $commentCloser
         );
@@ -82,7 +86,7 @@ class DocCommentSpacingSniff implements Sniff
     public function register(): array
     {
         return [
-            T_DOC_COMMENT_OPEN_TAG,
+            \T_DOC_COMMENT_OPEN_TAG
         ];
     }
 
@@ -139,7 +143,7 @@ class DocCommentSpacingSniff implements Sniff
      * @param int $openPointer
      * @param int $startPointer
      *
-     * @throws \SlevomatCodingStandard\Helpers\EmptyFileException
+     * @return void
      */
     private function checkLinesBeforeFirstContent(int $openPointer, int $startPointer): void
     {
@@ -347,12 +351,12 @@ class DocCommentSpacingSniff implements Sniff
             /** @var int $actualPointer */
             $actualPointer = TokenHelper::findNextExcluding(
                 $this->phpcsFile,
-                [T_DOC_COMMENT_STAR, T_DOC_COMMENT_WHITESPACE],
+                [\T_DOC_COMMENT_STAR, \T_DOC_COMMENT_WHITESPACE],
                 $actualPointer + 1,
                 $this->tokens[$openPointer]['comment_closer'] + 1
             );
 
-            if ($this->tokens[$actualPointer]['code'] !== T_DOC_COMMENT_STRING) {
+            if ($this->tokens[$actualPointer]['code'] !== \T_DOC_COMMENT_STRING) {
                 break;
             }
 

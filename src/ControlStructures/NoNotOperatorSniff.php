@@ -22,8 +22,8 @@ class NoNotOperatorSniff implements Sniff
     public function register(): array
     {
         return [
-            T_BOOLEAN_NOT,
-            T_IS_NOT_EQUAL
+            \T_BOOLEAN_NOT,
+            \T_IS_NOT_EQUAL
         ];
     }
 }
