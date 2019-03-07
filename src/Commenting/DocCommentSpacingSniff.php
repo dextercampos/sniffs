@@ -13,7 +13,7 @@ namespace NatePage\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use SlevomatCodingStandard\Helpers\Annotation;
+use SlevomatCodingStandard\Helpers\Annotation\Annotation;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
 use SlevomatCodingStandard\Helpers\DocCommentHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
@@ -89,7 +89,7 @@ class DocCommentSpacingSniff implements Sniff
     /**
      * Check lines between different annotations.
      *
-     * @param \SlevomatCodingStandard\Helpers\Annotation $annotation
+     * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation
      * @param int $linesCount
      *
      * @return void
@@ -163,7 +163,7 @@ class DocCommentSpacingSniff implements Sniff
     /**
      * Check lines between annotations.
      *
-     * @param \SlevomatCodingStandard\Helpers\Annotation[] $annotations
+     * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation[] $annotations
      *
      * @return void
      *
@@ -200,7 +200,7 @@ class DocCommentSpacingSniff implements Sniff
      *
      * @param int $startPointer
      * @param int $endPointer
-     * @param null|\SlevomatCodingStandard\Helpers\Annotation $firstAnnotation
+     * @param null|\SlevomatCodingStandard\Helpers\Annotation\Annotation $firstAnnotation
      *
      * @return void
      *
@@ -240,7 +240,7 @@ class DocCommentSpacingSniff implements Sniff
     /**
      * Check lines between same annotations.
      *
-     * @param \SlevomatCodingStandard\Helpers\Annotation $annotation
+     * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation
      * @param int $linesCount
      *
      * @return void
@@ -273,8 +273,8 @@ class DocCommentSpacingSniff implements Sniff
     /**
      * Count lines between current and previous annotations.
      *
-     * @param \SlevomatCodingStandard\Helpers\Annotation $current
-     * @param \SlevomatCodingStandard\Helpers\Annotation $previous
+     * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $current
+     * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $previous
      *
      * @return int
      *
@@ -299,7 +299,7 @@ class DocCommentSpacingSniff implements Sniff
     /**
      * Get annotation name.
      *
-     * @param \SlevomatCodingStandard\Helpers\Annotation $annotation
+     * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation
      *
      * @return string
      */
@@ -315,7 +315,7 @@ class DocCommentSpacingSniff implements Sniff
      *
      * @param int $openPointer
      *
-     * @return \SlevomatCodingStandard\Helpers\Annotation[]
+     * @return \SlevomatCodingStandard\Helpers\Annotation\Annotation[]
      */
     private function getAnnotations(int $openPointer): array
     {

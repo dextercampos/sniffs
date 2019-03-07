@@ -5,7 +5,7 @@ namespace NatePage\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use SlevomatCodingStandard\Helpers\Annotation;
+use SlevomatCodingStandard\Helpers\Annotation\Annotation;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
 use SlevomatCodingStandard\Helpers\DocCommentHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
@@ -77,7 +77,7 @@ class AnnotationSortingSniff implements Sniff
     /**
      * Check annotations are sorted.
      *
-     * @param \SlevomatCodingStandard\Helpers\Annotation[] $annotations
+     * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation[] $annotations
      *
      * @return void
      */
@@ -178,7 +178,7 @@ class AnnotationSortingSniff implements Sniff
     /**
      * Get annotation name.
      *
-     * @param \SlevomatCodingStandard\Helpers\Annotation $annotation
+     * @param \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation
      *
      * @return string
      */
@@ -194,7 +194,7 @@ class AnnotationSortingSniff implements Sniff
      *
      * @param int $openPointer
      *
-     * @return \SlevomatCodingStandard\Helpers\Annotation[]
+     * @return \SlevomatCodingStandard\Helpers\Annotation\Annotation[]
      */
     private function getAnnotations(int $openPointer): array
     {
